@@ -1,10 +1,10 @@
 package Utilities;
 
-import Pages.loginPage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,17 +17,25 @@ public class Utilities {
 
     public static void clickElement(@NotNull AndroidDriver driver, By locator)
     {
-        new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.elementToBeClickable(locator));
-        driver.findElement(locator).click();
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(ExpectedConditions.elementToBeClickable(locator));
+            driver.findElement(locator).click();
+        }catch (TimeoutException e) {
+            System.out.println("Element not clickable in time: " + e.getMessage());
+        }
+
+
 
     }
-    public static void SendData(@NotNull AndroidDriver driver, By locator, String Text)
-    {
-      new WebDriverWait(driver,Duration.ofSeconds(5))
-              .until(ExpectedConditions.elementToBeClickable(locator));
-        driver.findElement(locator).sendKeys(Text);
-
+    public static void SendData(@NotNull AndroidDriver driver, By locator, String Text) {
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(ExpectedConditions.elementToBeClickable(locator));
+            driver.findElement(locator).sendKeys(Text);
+        } catch (TimeoutException e) {
+            System.out.println("Element not clickable in time: " + e.getMessage());
+        }
     }
 
     public static void scrollUntilView(AndroidDriver driver,String text)

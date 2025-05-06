@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="landingPageRegressionTC">
+
+    <test name ="LandingPageT">
+
+        <classes>
+            <class name="testCases.p02_LandingPageTC"/>
+        </classes>
+    </test>
+
+
+</suite>
